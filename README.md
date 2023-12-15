@@ -1,9 +1,13 @@
 ## First time setup
 
-Install packer
+Install packer  
+Windows
 ```
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim "%USERPROFILE%/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim
+```
+Linux
+```
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
  Open nvim  
