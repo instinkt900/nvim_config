@@ -2,12 +2,8 @@ return {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     dependencies = {
-        --- Uncomment these if you want to manage LSP servers from neovim
         { 'williamboman/mason.nvim' },
         { 'williamboman/mason-lspconfig.nvim' },
-
-        -- LSP Support
-        { 'neovim/nvim-lspconfig' },
 
         -- Autocompletion
         { 'hrsh7th/nvim-cmp' },
@@ -35,50 +31,5 @@ return {
             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         end)
-
-        require('mason').setup({
-            ui = {
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-        })
-
-        require('mason-lspconfig').setup({
-            ensure_installed = {
-                'tsserver',
-                'lua_ls',
-                'rust_analyzer',
-                'clangd'
-            },
-            handlers = {
-                lsp_zero.default_setup,
-                tsserver = function()
-                    require('lspconfig').tsserver.setup({
-                        settings = {
-                            completions = {
-                                completionFunctionCalls = true
-                            }
-                        }
-                    })
-                end,
-                lua_ls = function()
-                    require('lspconfig').lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { 'vim' }
-                                }
-                            }
-                        }
-                    }
-                end,
-                clangd = function()
-                    require('lspconfig').clangd.setup {}
-                end
-            },
-        })
     end
 }
