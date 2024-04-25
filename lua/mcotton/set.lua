@@ -1,9 +1,13 @@
 --vim.opt.guicursor = ""
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 vim.opt.mouse = ""
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -22,6 +26,9 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8;
@@ -31,8 +38,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "100"
-
-vim.g.mapleader = " "
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
