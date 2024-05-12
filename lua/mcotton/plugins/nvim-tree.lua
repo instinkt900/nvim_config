@@ -12,8 +12,8 @@ return {
         nvimtree.setup({
             view = {
                 float = {
-                    enable = true,
-                    open_win_config = function()
+                    enable = false,
+                    --[[ open_win_config = function()
                         local screen_w = vim.opt.columns:get()
                         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
                         local window_w = screen_w * WIDTH_RATIO
@@ -31,11 +31,12 @@ return {
                             width = window_w_int,
                             height = window_h_int,
                         }
-                    end,
+                    end, ]]
                 },
-                width = function()
+                --[[ width = function()
                     return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
-                end,
+                end, ]]
+                width = 35,
                 relativenumber = true,
             },
 

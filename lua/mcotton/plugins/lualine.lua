@@ -6,6 +6,12 @@ return {
         require('lualine').setup({
             options = { theme = "auto" },
             sections = {
+                lualine_c = {
+                    {
+                        'filename',
+                        path = 1,
+                    },
+                },
                 lualine_x = {
                     {
                         lazy_status.updates,
@@ -15,6 +21,11 @@ return {
                     { "encoding" },
                     { "fileformat" },
                     { "filetype" },
+                },
+                lualine_z = {
+                    {
+                        'location',
+                    },
                 },
             },
         })
