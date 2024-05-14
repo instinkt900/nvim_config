@@ -4,16 +4,17 @@ return {
     config = function()
         local nvimtree = require("nvim-tree")
 
+        local WIDTH_RATIO = 0.6
+        local HEIGHT_RATIO = 0.6
+
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
-        local HEIGHT_RATIO = 0.5
-        local WIDTH_RATIO = 0.5
 
         nvimtree.setup({
             view = {
                 float = {
-                    enable = false,
-                    --[[ open_win_config = function()
+                    enable = true,
+                    open_win_config = function()
                         local screen_w = vim.opt.columns:get()
                         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
                         local window_w = screen_w * WIDTH_RATIO
@@ -31,12 +32,11 @@ return {
                             width = window_w_int,
                             height = window_h_int,
                         }
-                    end, ]]
+                    end,
                 },
-                --[[ width = function()
+                width = function()
                     return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
-                end, ]]
-                width = 35,
+                end,
                 relativenumber = true,
             },
 
@@ -52,9 +52,6 @@ return {
                         enable = false,
                     },
                 },
-            },
-            filters = {
-                custom = { ".DS_Store" },
             },
             git = {
                 ignore = false,
