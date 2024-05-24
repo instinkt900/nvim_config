@@ -4,11 +4,13 @@ return {
     main = "ibl",
     opts = {
         enabled = true,
-        indent = { char = "┊" },
+        indent = {
+            char = "┊"
+        },
         scope = {
-            enabled = false,
+            enabled = true,
             show_start = false,
-            highlight = { "Function", "Label" },
+            -- highlight = { "Function", "Label", "String" },
         }
     },
 }
