@@ -17,15 +17,15 @@ return {
 
         require('mason-lspconfig').setup({
             ensure_installed = {
-                'tsserver',
+                'ts_ls',
                 'lua_ls',
                 'rust_analyzer',
                 'clangd'
             },
             handlers = {
                 require('lsp-zero').default_setup,
-                tsserver = function()
-                    require('lspconfig').tsserver.setup({
+                ts_ls = function()
+                    require('lspconfig').ts_ls.setup({
                         settings = {
                             completions = {
                                 completionFunctionCalls = true

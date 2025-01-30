@@ -7,8 +7,8 @@ return {
         local WIDTH_RATIO = 0.6
         local HEIGHT_RATIO = 0.6
 
-        vim.g.loaded_netrw = 1
-        vim.g.loaded_netrwPlugin = 1
+        -- vim.g.loaded_netrw = 1
+        -- vim.g.loaded_netrwPlugin = 1
 
         nvimtree.setup({
             view = {
