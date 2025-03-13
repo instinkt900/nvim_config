@@ -18,6 +18,7 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 'ts_ls',
+                'eslint',
                 'lua_ls',
                 'rust_analyzer',
                 'clangd'
@@ -28,7 +29,7 @@ return {
                     require('lspconfig').ts_ls.setup({
                         settings = {
                             completions = {
-                                completionFunctionCalls = true
+                                completeFunctionCalls = true
                             }
                         }
                     })

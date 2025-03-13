@@ -23,12 +23,12 @@ vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete without replacing the register" })
 vim.keymap.set("v", "<leader>d", "\"_d", { desc = "Delete without replacing the register" })
 
--- format entire buffer?
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, { desc = "Format entire buffer" })
+-- format entire buffer
+vim.keymap.set("n", "<leader>f", function() require("conform").format({ lsp_format = "fallback" }) end, { desc = "Format entire buffer" })
 
 -- quickfix navigation
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Prev quickfix" })
+vim.keymap.set("n", "<M-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "<M-j>", "<cmd>cprev<CR>zz", { desc = "Prev quickfix" })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list" })
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
 
