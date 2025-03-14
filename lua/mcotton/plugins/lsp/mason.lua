@@ -27,11 +27,11 @@ return {
                 require('lsp-zero').default_setup,
                 ts_ls = function()
                     require('lspconfig').ts_ls.setup({
-                        settings = {
-                            completions = {
-                                completeFunctionCalls = true
-                            }
-                        }
+                        -- settings = {
+                        --     completions = {
+                        --         completeFunctionCalls = true
+                        --     }
+                        -- }
                     })
                 end,
                 lua_ls = function()
