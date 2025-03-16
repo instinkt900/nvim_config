@@ -62,3 +62,5 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Toggle git window" })
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle the undo tree" })
 
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
+
+vim.keymap.set("i", "<C-j>", "<CR><C-O>k<C-O>$", { desc = "Insert newline below cursor", noremap = true, silent = true })

@@ -49,3 +49,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+      pattern = "gitcommit",
+      callback = function()
+        local textwidth = vim.bo.textwidth
+        if textwidth > 0 then
+              vim.wo.colorcolumn = tostring(textwidth)
+        end
+  end,
+})
+
