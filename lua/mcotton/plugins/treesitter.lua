@@ -3,6 +3,14 @@ return {
     -- event = { "BufReadPre", "BufNewFile" },
     -- build = ':TSUpdate',
     config = function()
+        -- when this draws virtual text scrolling performance drops
+        -- probably not a big deal because we shouldn't be scrolling honestly.
+        require('treesitter-context').setup({
+            enable = true,
+            max_lines = 1,
+            trim_scope = "outer"
+        })
+
         local treesitter = require('nvim-treesitter.configs')
         treesitter.setup({
             -- A list of parser names, or "all" (the five listed parsers should always be installed)
