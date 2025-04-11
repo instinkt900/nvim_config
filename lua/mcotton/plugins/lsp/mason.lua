@@ -46,6 +46,7 @@ return {
                     }
                 end,
                 clangd = function()
+                    -- require('lspconfig').clangd.setup { cmd = { "clangd", "--log=verbose" } }
                     require('lspconfig').clangd.setup {}
                 end
             },

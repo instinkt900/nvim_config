@@ -50,12 +50,27 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-      pattern = "gitcommit",
-      callback = function()
+    pattern = "gitcommit",
+    callback = function()
         local textwidth = vim.bo.textwidth
         if textwidth > 0 then
-              vim.wo.colorcolumn = tostring(textwidth)
+            vim.wo.colorcolumn = tostring(textwidth)
         end
-  end,
+    end,
 })
 
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+--     pattern = { "cpp", "c", "h", "hpp" },
+--     callback = function()
+--         vim.schedule(function()
+--             require("lint").try_lint()
+--         end)
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--     pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+--     callback = function()
+--         require("lint").try_lint()
+--     end,
+-- })

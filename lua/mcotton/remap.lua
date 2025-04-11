@@ -64,3 +64,6 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle the un
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 
 vim.keymap.set("i", "<C-j>", "<CR><C-O>k<C-O>$", { desc = "Insert newline below cursor", noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-l>", function() require("lint").try_lint() end, { desc = "Lint current buffer" })
+
