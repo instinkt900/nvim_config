@@ -6,7 +6,7 @@ return {
         -- when this draws virtual text scrolling performance drops
         -- probably not a big deal because we shouldn't be scrolling honestly.
         require('treesitter-context').setup({
-            enable = true,
+            enable = false,
             max_lines = 1,
             trim_scope = "outer"
         })

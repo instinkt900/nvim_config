@@ -4,7 +4,11 @@ return {
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
-        "folke/todo-comments.nvim",
+        { 'folke/todo-comments.nvim' },
+        {
+            'nvim-telescope/telescope-live-grep-args.nvim',
+            version = "^1.0.0",
+        },
     },
     config = function()
         local telescope = require("telescope")
@@ -25,8 +29,7 @@ return {
                 fzf = {}
             }
         })
-
+        telescope.load_extension("live_grep_args")
         telescope.load_extension("fzf")
     end
 }
-
