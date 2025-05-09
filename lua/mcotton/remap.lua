@@ -4,9 +4,26 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected block down 
 
 -- append line below to the end of this line with a space but leave the cursor
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append the line below to the current line" })
+
 -- jump half a page up or down leaving the curser centered
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move view down half a page" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move view up half a page" })
+
+local function move_to_center()
+    local top = vim.fn.line('w0')
+    local mid = top + math.floor(vim.fn.winheight(0) / 2)
+    vim.cmd("normal! " .. mid .. "G")
+end
+
+vim.keymap.set("n", "<C-j>", function()
+    move_to_center()
+    vim.cmd("normal! jzz")
+end, { desc = "Move scroll down one line" })
+vim.keymap.set("n", "<C-k>", function()
+    move_to_center()
+    vim.cmd("normal! kzz")
+end, { desc = "Move scroll up one line" })
+
 -- next/prev search match but in center of screen
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next match" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev match" })
@@ -24,7 +41,8 @@ vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete without replacing the 
 vim.keymap.set("v", "<leader>d", "\"_d", { desc = "Delete without replacing the register" })
 
 -- format entire buffer
-vim.keymap.set("n", "<leader>f", function() require("conform").format({ lsp_format = "fallback" }) end, { desc = "Format entire buffer" })
+vim.keymap.set("n", "<leader>f", function() require("conform").format({ lsp_format = "fallback" }) end,
+    { desc = "Format entire buffer" })
 
 -- quickfix navigation
 vim.keymap.set("n", "<M-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
@@ -33,8 +51,10 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location lis
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
 
 -- quick replace
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Quick replace word under cursor (Uses current word)" })
-vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { desc = "Quick replace word under cursor (Empty replace)" })
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Quick replace word under cursor (Uses current word)" })
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]],
+    { desc = "Quick replace word under cursor (Empty replace)" })
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
 
 vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader, { desc = "Switch source/header" })
@@ -56,7 +76,8 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
-vim.keymap.set("n", "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end, { desc = "Find files with arguments" })
+vim.keymap.set("n", "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end,
+    { desc = "Find files with arguments" })
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Toggle git window" })
 
@@ -67,4 +88,3 @@ vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 vim.keymap.set("i", "<C-j>", "<CR><C-O>k<C-O>$", { desc = "Insert newline below cursor", noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-l>", function() require("lint").try_lint() end, { desc = "Lint current buffer" })
-
