@@ -16,12 +16,28 @@ local function move_to_center()
 end
 
 vim.keymap.set("n", "<C-j>", function()
-    move_to_center()
-    vim.cmd("normal! jzz")
+    local rel_row = vim.fn.winline()
+    vim.cmd("normal! Mjzz")
+    local target_row = rel_row
+    local current_row = vim.fn.winline()
+    local delta = target_row - current_row
+    if delta > 0 then
+        vim.cmd('normal! ' .. delta .. 'j')
+    elseif delta < 0 then
+        vim.cmd('normal! ' .. delta + 1 .. 'k')
+    end
 end, { desc = "Move scroll down one line" })
 vim.keymap.set("n", "<C-k>", function()
-    move_to_center()
-    vim.cmd("normal! kzz")
+    local rel_row = vim.fn.winline()
+    vim.cmd("normal! Mkzz")
+    local target_row = rel_row
+    local current_row = vim.fn.winline()
+    local delta = target_row - current_row
+    if delta > 0 then
+        vim.cmd('normal! ' .. delta .. 'j')
+    elseif delta < 0 then
+        vim.cmd('normal! ' .. delta + 1 .. 'k')
+    end
 end, { desc = "Move scroll up one line" })
 
 -- next/prev search match but in center of screen
@@ -29,12 +45,17 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next match" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev match" })
 
 -- paste but putting the replacement into the void register
-vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the register" })
+-- vim.keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the register" })
 
 -- yank to the system clipboard rather than internal vim
 vim.keymap.set("n", "<leader>y", "\"+y", { desc = "Yank to clipboard" })
 vim.keymap.set("v", "<leader>y", "\"+y", { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = "Yank to clipboard" })
+
+-- paste from the system clipboard
+vim.keymap.set("n", "<leader>p", "\"+p", { desc = "Paste to clipboard" })
+vim.keymap.set("v", "<leader>p", "\"+p", { desc = "Paste to clipboard" })
+vim.keymap.set("n", "<leader>P", "\"+P", { desc = "Paste to clipboard" })
 
 -- delete into void register
 vim.keymap.set("n", "<leader>d", "\"_d", { desc = "Delete without replacing the register" })
@@ -78,6 +99,10 @@ vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Fi
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
 vim.keymap.set("n", "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end,
     { desc = "Find files with arguments" })
+vim.keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Fuzzy find document symbols" })
+vim.keymap.set("n", "<leader>fy", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Fuzzy find workspace symbols" })
+vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { desc = "Go to definition under cursor" })
+vim.keymap.set("n", "vrr", "<cmd>Telescope lsp_references<cr>", { desc = "Find references to symbol under cursor" })
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Toggle git window" })
 
