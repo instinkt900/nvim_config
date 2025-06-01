@@ -16,7 +16,6 @@ require('lazy').setup({
         { import = "mcotton.plugins.lsp" },
         -- 'nvim-treesitter/playground',
         'mbbill/undotree',
-        'tpope/vim-fugitive',
         'nvim-treesitter/nvim-treesitter-context',
     },
     {

@@ -5,6 +5,8 @@ vim.g.maplocalleader = "\\"
 
 vim.opt.mouse = ""
 
+vim.opt.conceallevel = 2
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
