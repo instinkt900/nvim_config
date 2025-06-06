@@ -13,8 +13,11 @@ return {
                 ["<C-l>"] = false,
             },
             view_options = {
-                show_hidden = true
-            }
+                show_hidden = true,
+            },
+            win_options = {
+                signcolumn = "auto:2",
+            },
         })
     end,
 }

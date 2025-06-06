@@ -5,7 +5,7 @@ vim.g.maplocalleader = "\\"
 
 vim.opt.mouse = ""
 
-vim.opt.conceallevel = 2
+vim.opt.conceallevel = 0
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -76,3 +76,21 @@ vim.api.nvim_create_autocmd("FileType", {
 --         require("lint").try_lint()
 --     end,
 -- })
+
+-- Set conceallevel=2 for markdown only
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.conceallevel = 2
+  end,
+})
+
+-- Optional: reset conceallevel to 0 for everything else
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    if vim.bo.filetype ~= "markdown" then
+      vim.opt_local.conceallevel = 0
+    end
+  end,
+})
+
