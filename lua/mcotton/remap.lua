@@ -113,3 +113,7 @@ vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 vim.keymap.set("i", "<C-j>", "<CR><C-O>k<C-O>$", { desc = "Insert newline below cursor", noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-l>", function() require("lint").try_lint() end, { desc = "Lint current buffer" })
+
+vim.keymap.set("n", "nc", function()
+    vim.cmd("vsplit " .. vim.fn.stdpath("config"))
+end, { desc = "Open nvim config in vertical split." })

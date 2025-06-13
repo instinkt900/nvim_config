@@ -68,6 +68,10 @@ return {
     vim.keymap.set("n", "<leader>on", ":ObsidianNew<cr>", { desc = "Create new obsidian note." })
     vim.keymap.set("n", "<leader>os", ":ObsidianSearch<cr>", { desc = "Search obsidian notes." })
     vim.keymap.set("n", "<leader>ot", ":ObsidianTags<cr>", { desc = "Search obsidian tags." })
-    vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<cr>", { desc = "Open obsidian notes." })
+    vim.keymap.set("n", "<leader>oo", function()
+      local client = require("obsidian").get_client()
+      local vault_path = client.dir.filename
+      vim.cmd("vsplit " .. vim.fn.fnameescape(vault_path))
+    end, { desc = "Open notes in vertical split." })
   end
 }
