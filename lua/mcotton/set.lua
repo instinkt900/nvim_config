@@ -94,3 +94,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+vim.api.nvim_create_user_command("ClangdSwitchSourceHeader", function()
+  local params = { uri = vim.uri_from_bufnr(0) }
+  vim.lsp.buf_request(0, "textDocument/switchSourceHeader", params, function(err, result)
+    if result then
+      vim.cmd("edit " .. vim.uri_to_fname(result))
+    else
+      print("Cannot switch source/header")
+    end
+  end)
+end, {})
+
