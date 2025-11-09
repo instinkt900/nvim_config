@@ -105,3 +105,10 @@ vim.api.nvim_create_user_command("ClangdSwitchSourceHeader", function()
   end)
 end, {})
 
+vim.keymap.set('n', 'j', function()
+  return vim.wo.wrap and vim.v.count == 0 and 'gj' or 'j'
+end, { expr = true, silent = true })
+
+vim.keymap.set('n', 'k', function()
+  return vim.wo.wrap and vim.v.count == 0 and 'gk' or 'k'
+end, { expr = true, silent = true })
