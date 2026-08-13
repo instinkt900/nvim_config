@@ -15,16 +15,20 @@ return {
             },
         })
 
+        -- clangd is managed by the system, not mason
+        require('lspconfig').clangd.setup({})
+
         require('mason-lspconfig').setup({
             ensure_installed = {
                 'ts_ls',
                 'eslint',
                 'lua_ls',
                 'rust_analyzer',
-                'clangd'
             },
             handlers = {
-                require('lsp-zero').default_setup,
+                function(server_name)
+                    require('lspconfig')[server_name].setup({})
+                end,
                 ts_ls = function()
                     require('lspconfig').ts_ls.setup({
                         -- settings = {
@@ -45,10 +49,6 @@ return {
                         }
                     }
                 end,
-                clangd = function()
-                    -- require('lspconfig').clangd.setup { cmd = { "clangd", "--log=verbose" } }
-                    require('lspconfig').clangd.setup {}
-                end
             },
         })
     end

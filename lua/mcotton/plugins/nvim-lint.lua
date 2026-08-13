@@ -8,7 +8,7 @@ return {
         local clangtidy = require('lint').linters.clangtidy
         clangtidy.args = {
             '--quiet',
-            '-p', '/home/mcotton/Development/canyon/build/Debug'
+            '-p', '/home/mcotton/Development/moth/moth_ui/build/Debug'
         }
     end
 }
