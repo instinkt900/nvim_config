@@ -1,7 +1,7 @@
 return {
     'williamboman/mason.nvim',
     dependencies = {
-        { 'williamboman/mason-lspconfig.nvim' },
+        { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
         { 'neovim/nvim-lspconfig' },
     },
     config = function()
@@ -15,42 +15,30 @@ return {
             },
         })
 
-        -- clangd is managed by the system, not mason
-        require('lspconfig').clangd.setup({})
-
-        require('mason-lspconfig').setup({
+        require('mason-tool-installer').setup({
             ensure_installed = {
-                'ts_ls',
-                'eslint',
-                'lua_ls',
-                'rust_analyzer',
-            },
-            handlers = {
-                function(server_name)
-                    require('lspconfig')[server_name].setup({})
-                end,
-                ts_ls = function()
-                    require('lspconfig').ts_ls.setup({
-                        -- settings = {
-                        --     completions = {
-                        --         completeFunctionCalls = true
-                        --     }
-                        -- }
-                    })
-                end,
-                lua_ls = function()
-                    require('lspconfig').lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { 'vim' }
-                                }
-                            }
-                        }
-                    }
-                end,
+                'eslint-lsp',
+                'lua-language-server',
+                'rust-analyzer',
+                'typescript-language-server',
             },
         })
+
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                },
+            },
+        })
+
+        -- clangd is managed by the system (nixos clang-tools), not mason.
+        vim.lsp.enable('clangd')
+        vim.lsp.enable('eslint')
+        vim.lsp.enable('lua_ls')
+        vim.lsp.enable('rust_analyzer')
+        vim.lsp.enable('ts_ls')
     end
 }
-

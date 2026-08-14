@@ -6,9 +6,9 @@ return {
             c = { 'clangtidy' },
         }
         local clangtidy = require('lint').linters.clangtidy
-        clangtidy.args = {
-            '--quiet',
-            '-p', '/home/mcotton/Development/moth/moth_ui/build/Debug'
-        }
+        local build_dir = '/home/mcotton/Development/moth/moth_ui/build/Debug'
+        clangtidy.args = vim.fn.isdirectory(build_dir) == 1
+            and { '--quiet', '-p', build_dir }
+            or { '--quiet' }
     end
 }
